@@ -24,10 +24,10 @@ storageRef?.putFile(photoUri!!)?.addOnSuccessListener {
 ```swift
 var photoUri = [사진 URL]
 storageRef?.putFile(photoUri!!)?.addOnSuccessListener {
-            storageRef.downloadUrl.addOnSuccessListener { uri ->
-				var imageUrl = uri.toString()
-			}
-		}
+	storageRef.downloadUrl.addOnSuccessListener { uri ->
+		var imageUrl = uri.toString()
+	}
+}
 ```
 사진을 가져오는 방법은 1단계 경로지정의 **storageRef**에다가 **getDownlaodUrl**을 통해서 받아오면 됩니다. 서버와 동기화 이전에 받아오게되면 에러가 발생되기 때문에 반드시 **addOnSuccessListener**안에서 호출 하시길 바랍니다.
 
@@ -36,11 +36,12 @@ storageRef?.putFile(photoUri!!)?.addOnSuccessListener {
  - Promise방식
 ```swift
 var photoUri = [사진 URL]
-storageRef?.putFile(photoUri!!)?.continueWithTask { task: Task<UploadTask.TaskSnapshot> ->
+storageRef?.putFile(photoUri!!)?.continueWithTask 
+	{ task: Task<UploadTask.TaskSnapshot> ->
             return@continueWithTask storageRef.downloadUrl
         }?.addOnSuccessListener { uri ->
 			var imageUrl = uri.toString()
-		}
+	}
 ```
 
 
